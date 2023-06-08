@@ -8,6 +8,7 @@ class M {
 		int column;
 
 		void init() {
+			matrix = new int* [row];
 			for (int i = 0; i < row; i++)
 			{
 				matrix[i] = new int[column];
@@ -37,7 +38,6 @@ class M {
 			else {
 				row = r;
 				column = c;
-				matrix = new int* [row];
 				init();
 				fill();
 			}
