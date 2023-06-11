@@ -8,7 +8,6 @@ class M {
 		int column;
 
 		void init() {
-			matrix = new int* [row];
 			for (int i = 0; i < row; i++)
 			{
 				matrix[i] = new int[column];
@@ -26,6 +25,12 @@ class M {
 			}
 		}
 
+		void swap(int* a, int* b) {
+			*a = *a + *b;
+			*b = *a - *b;
+			*a = *a - *b;
+		}
+
 	public:
 		M() {
 			std::cout << "Error: Fill size values!" << std::endl;
@@ -38,6 +43,7 @@ class M {
 			else {
 				row = r;
 				column = c;
+				matrix = new int* [row];
 				init();
 				fill();
 			}
@@ -54,6 +60,57 @@ class M {
 			}
 			std::cout << std::endl;
 		}
+
+		void ColSwap() {
+			for (int i = 0; i < row; i++)
+			{
+				swap(&matrix[i][0], &matrix[i][2]);
+			}
+		}
+
+		void RowSwap() {
+			for (int i = 0; i < column; i++)
+			{
+				swap(&matrix[0][i], &matrix[2][i]);
+			}
+		}
+
+		M(const M& obj) {
+			this->row = obj.row;
+			this->column = obj.column;
+			this->matrix = new int* [row];
+
+			for (int i = 0; i < row; i++) {
+				matrix[i] = new int[column];
+			}
+
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < column; j++) {
+					matrix[i][j] = obj.matrix[i][j];
+				}
+			}
+		}
+
+		M& operator = (const M & obj) {
+			if (this != &obj)
+			{
+				this->row = obj.row;
+				this->column = obj.column;
+				this->matrix = new int* [row];
+
+				for (int i = 0; i < row; i++) {
+					matrix[i] = new int[column];
+				}
+
+				for (int i = 0; i < row; i++) {
+					for (int j = 0; j < column; j++) {
+						matrix[i][j] = obj.matrix[i][j];
+					}
+				}
+			}
+			return *this;
+		}
+
 		~M(){
 			for (int i = 0; i < row; i++)
 			{
@@ -74,4 +131,21 @@ int main() {
 
 	M matrix(row,columns);
 	matrix.print();
+
+	/*if (row >= 3 && columns >= 3)
+	{
+		matrix.ColSwap();
+		matrix.print();
+		matrix.ColSwap();
+		matrix.RowSwap();
+		matrix.print();
+	}*/
+
+	M matrix2(matrix);
+	matrix2.print();
+
+	M matrix3(row, columns);
+	matrix3 = matrix;
+	matrix3.print();
 }
+
