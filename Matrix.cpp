@@ -1,16 +1,17 @@
 #include <iostream>
 
+template<typename T>
 class M {
 private:
 
-	int** matrix;
+	T** matrix;
 	int row;
 	int column;
 
 	void init() {
 		for (int i = 0; i < row; i++)
 		{
-			matrix[i] = new int[column];
+			matrix[i] = new T[column];
 		}
 	}
 
@@ -43,19 +44,19 @@ public:
 		else {
 			row = r;
 			column = c;
-			matrix = new int* [row];
+			matrix = new T* [row];
 			init();
-			fill();
+			//fill();
 		}
 	}
 
 	M(const M& obj) {
 		this->row = obj.row;
 		this->column = obj.column;
-		this->matrix = new int* [row];
+		this->matrix = new T * [row];
 
 		for (int i = 0; i < row; i++) {
-			matrix[i] = new int[column];
+			matrix[i] = new T[column];
 		}
 
 		for (int i = 0; i < row; i++) {
@@ -70,10 +71,10 @@ public:
 		{
 			this->row = obj.row;
 			this->column = obj.column;
-			this->matrix = new int* [row];
+			this->matrix = new T * [row];
 
 			for (int i = 0; i < row; i++) {
-				matrix[i] = new int[column];
+				matrix[i] = new T[column];
 			}
 
 			for (int i = 0; i < row; i++) {
@@ -151,10 +152,7 @@ public:
 };
 
 int main() {
-	M matrix(std::move(M(3, 3)));
-	M mat(4,4);
-	mat = std::move(M(3, 3));
-	matrix.print();
-	mat.print();
+	M<int> mat(3, 3);
+	M<double> mat2(3, 3);
 }
 
