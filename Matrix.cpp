@@ -1,4 +1,7 @@
 #include <iostream>
+#include <fstream>
+
+std::ofstream f1("./f1.txt");
 
 template<typename T>
 class M {
@@ -121,7 +124,7 @@ public:
 		}
 		delete[] matrix;
 
-		std::cout << "Matrix deleted" << std::endl;
+		f1 << "Matrix deleted" << std::endl;
 	}
 public:
 	void print() {
@@ -129,11 +132,11 @@ public:
 		{
 			for (int j = 0; j < column; j++)
 			{
-				std::cout << matrix[i][j] << ' ';
+				f1 << matrix[i][j] << ' ';
 			}
-			std::cout << std::endl;
+			f1 << std::endl;
 		}
-		std::cout << std::endl;
+		f1 << std::endl;
 	}
 
 	void ColSwap() {
@@ -152,7 +155,8 @@ public:
 };
 
 int main() {
+	f1.clear();
 	M<int> mat(3, 3);
-	M<double> mat2(3, 3);
+	mat.print();
 }
 
